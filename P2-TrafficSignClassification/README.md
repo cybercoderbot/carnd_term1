@@ -24,7 +24,8 @@ The goals / steps of this project are the following:
 ---
 
 
-####1. Basic summary of the data set.
+
+**1. Basic summary of the data set**
 
 The training, validation and testing data are provided and stored in each pickled file. Each pickled data is a dictionary with 4 key/value pairs:
 
@@ -60,17 +61,17 @@ The shape of an traffic sign image is dim 2 to dim 4 of the `img_train` tensor:
 
 The number of classes in the data set is number of unique labels in `y_train`, which can be computed as:
 
->`n_classes = len(set(y_train))  `   
+>`n_classes = len(set(y_train))  `  
 
 
-
-####2. Exploratory visualization of the dataset.
+**2. Exploratory visualization of the dataset.**
 
 To have a sense of how many classes and how the classes are distributed in the dataset, a histogram is plotted to visualize the distribution of all classes (code cell [6]). As the histrogram shows, each class is not evenly distributed. Some classes have 1250~2000 examples while most classes in category 20-43 have ~250 examples.
 
 ![alt text][img3]
 
-###Design and Test a Model Architecture
+
+**Design and Test a Model Architecture**
 
 ####1. Image pre-processing (converting to grayscale and normalization).
 As the original images shows, raw data are cropped images of traffic signs, with a very low spatial resolution (32`x`32). The samples are in color space, and illumination condition is largely varied across classes. Some traffic signs has very well lighting condition while some are very poorly illuminated (code cell [7]). 
@@ -83,13 +84,13 @@ To reduce sensitivity in color, each color image is converted into gray-scale. A
 
 
 
-####2. Training, validation and testing data. 
+**2. Training, validation and testing data. **
 
 The training, validation and testing data are provided and stored in each pickled file. As mentioned above, training set has 34799 images, validation set has 
 4410 images and test set has 12630 images(code cell [1]).
 
 
-####3. Final model architecture.
+**3. Final model architecture.**
 
 The model consists of 2 layers of convolution and 3 layers of feed-forward networks. Each layer of convolution is with 5`x`5 spatial filters, followed by a RELU activation and a Max pooling in 2`x`2 neighborhood. The filter depth in layer 1 and layer 2 are 6 and 12. Since traffic signs are of spatial size of 32`x`32, 5`x`5 convolution kernal is a good balance between extracting useful features without being too computational intensive. Most of traffic signs are in centered part of the images, so valid padding is used for convolutions. 
 
@@ -114,12 +115,12 @@ In the feed-forward network, the number of neurons decrease to approximately a h
 
 ---
 
+**4. Train the convolution network. **
 
-
-####4. Train the convolution network. 
 For network training, a Adam optimizer is used for minimizing the training loss. The loss is computed as cross-entropy of softmax probabilities and traning labels. The Adam optimizer uses moving averages to update parameters, to prevent stuck in local optima. The algorithm uses an adaptive step size for learning, and thus converges to this step size without fine tuning. As a trade-off, the model requires more computation and memory parameters in each training step. The initial learning rate is 0.001. 
 
-####5. Mini-batch feeding and network convergence
+
+**5. Mini-batch feeding and network convergence**
 An iterative approach is used to train the network for convergence. In each epoch, the whole data set is divided into mini-batches before feeding to the network. This makes training faster and scalable. The batch size is 128. A validation accuracy is monitored at each iteration. As output of code cell [10] shows, the validation accuracy is increasing from Epoch 1 to epoch 45. After epoch 45, the validation accuracy changes downward. That means 45 is a good epoch number to train the network sufficiently without overfitting.
  
 The model is very similar to LeNet. LeNet has successfully used for OCR problem for MNIST data. Since traffic sign data is also of very low resolution, a 2 layer convolution followed by a 3 layer feedforward network is chosen. The final model results were
@@ -129,9 +130,9 @@ The model is very similar to LeNet. LeNet has successfully used for OCR problem 
 * test set accuracy: 91.81%
 
 
-###Test a Model on New Images
+**Test a Model on New Images**
 
-####1. Choose 9 German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
+1. Choose 9 German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
 Here are 9 German traffic signs that I found on the web:
 
@@ -153,7 +154,8 @@ After converting to grayscale and normalize pixel values, the output test images
 
 Although original images are of high relolution and pretty straight-forward, the preprocessed images might be difficult to classify since they are greatly down-sampled. "Children crossing" and "Stop" sign images looks most challenging.
 
-####2. Predictions on new traffic signs.
+
+2. Predictions on new traffic signs.
 
 After feeding these test images into the network, here are the results of the prediction:
 
@@ -173,10 +175,10 @@ After feeding these test images into the network, here are the results of the pr
 
 Out of 9 images, 7 of them are correctly classified, which gives an accuracy of 77.78%. It's less than what we got on test set (91%), but it's a very small dataset and 1 misclassified images cause the accuracy to drop by 11%. Surprisingly, children crossing image is correctly classified even though is heavly down-sampled. "Stop" sign is misclassified as "No vehicles" and "Bumpy road" is misclassified as "Turn left". I guess both have curves in the image center, which is confusing to the network.
 
-####3. Softmax probabilities for each prediction.
+
+3. Softmax probabilities for each prediction.
 
 The code for making predictions on my final model is located in the code cell [16]. 
-
 
 For each prediction, the newtork is very confident (the corresponding probability being 1 and all else being 0). For example, the top five soft max probabilities were
 
@@ -192,7 +194,8 @@ For each prediction, the newtork is very confident (the corresponding probabilit
 ---
 This means that the model is very well trained. Some methods to prevent overfitting might be helpful to improve the network. 
 
-####3. Feature maps
+
+3. Feature maps
 In layer C1, the feature map picks up main edges of the input image. Each feature map detected edges of different orientations, in combination all the feature maps learned the main shape of the traffic sign (a triangle). 
 
 <img src=./results/c1_1.png height="200" width="540" >
