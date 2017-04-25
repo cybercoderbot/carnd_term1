@@ -24,7 +24,7 @@ The goals / steps of this project are the following:
 
 
 ---
-Files Submitted & Code Quality
+**Files Submitted & Code Quality**
 
 1. Submission includes all required files and can be used to run the simulator in autonomous mode
 
@@ -57,7 +57,7 @@ python drive.py model.h5
 The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
 
 ---
-Model Architecture and Training Strategy
+**Model Architecture and Training Strategy**
 
 1. An appropriate model architecture has been employed
 
@@ -84,9 +84,6 @@ Some adjustments was made to the model: 1) A Lambda layer is used at the beginin
 
 The activation function for convolution and fully-connected layers is ELU (Exponential Linear Units), which is similar to ReLU, the mean of the activation is more close to zero. This activation introduces nonlinearity, and prevents the vanishing gradient problem. After the convolution, dropout is introduced to reduce overfitting. The keep probability is 0.5.
 
-
-
-
 2. Attempts to reduce overfitting in the model
 
 In order to reduce overfitting, the model contains dropout layers with keep probability of 0.5. Also, the model was trained and validated on different data sets, and the model stop training when the validation errors increases. The model was tested by running it through the simulator and ensuring that the vehicle stays on the track.
@@ -99,7 +96,7 @@ The model used an Adam optimizer, so the parameters are automatically updated.
 
 Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, recovering from the left and right sides of the road.
 
-Model Architecture and Training Strategy
+**Model Architecture and Training Strategy**
 
 1. Solution Design Approach
 
@@ -151,7 +148,7 @@ To capture good driving behavior, I first recorded two laps on track one using c
 |![alt text][center2] |
 
 
-In , three camera shots are taken for each time-stamp (one from center, one from left, and one from right):
+In fact, three camera shots are taken for each time-stamp (one from center, one from left, and one from right):
 
 | |   | 
 |:--------:|:------------:|
