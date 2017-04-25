@@ -1,8 +1,6 @@
-#**Behavioral Cloning** 
+**Behavioral Cloning** 
 
 ---
-
-**Behavioral Cloning Project**
 
 The goals / steps of this project are the following:
 
@@ -26,9 +24,9 @@ The goals / steps of this project are the following:
 
 
 ---
-###Files Submitted & Code Quality
+Files Submitted & Code Quality
 
-####1. Submission includes all required files and can be used to run the simulator in autonomous mode
+1. Submission includes all required files and can be used to run the simulator in autonomous mode
 
 My project includes the following files:
 
@@ -48,31 +46,31 @@ My project includes the following files:
 
 
 ---
-####2. Submission includes functional code
+2. Submission includes functional code
 Using the driving simulator and my drive.py file, the car can be driven autonomously around the track by executing 
 ```sh
 python drive.py model.h5
 ```
 
-####3. Submission code is usable and readable
+3. Submission code is usable and readable
 
 The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
 
 ---
-###Model Architecture and Training Strategy
+Model Architecture and Training Strategy
 
-####1. An appropriate model architecture has been employed
+1. An appropriate model architecture has been employed
 
 The model is based on Nvidia paper (https://images.nvidia.com/content/tegra/automotive/images/2016/solutions/pdf/end-to-end-dl-using-px.pdf) for training a convolutional neural network (CNN) to map raw pixels from a single front-facing camera directly to steering commands. This end-to-end approach is very relevant to this project since we also aim at training the network for steering with limited training data. 
 
 In summary, it is a deep neural network for predict driving commands from front-view camera images.  The model applies 5 layers of convolutions for feature extraction and 5 layers of fully-connected network for regression, as follows:
 
 - Image pre-processing
-- Convolution: 5&times;5, filter: 24, strides: 2x2, activation: ELU
-- Convolution: 5&times;5, filter: 36, strides: 2x2, activation: ELU
-- Convolution: 5&times;5, filter: 48, strides: 2x2, activation: ELU
-- Convolution: 3&times;3, filter: 64, strides: 1x1, activation: ELU
-- Convolution: 3&times;3, filter: 64, strides: 1x1, activation: ELU
+- Convolution: 5x5, filter: 24, strides: 2x2, activation: ELU
+- Convolution: 5x5, filter: 36, strides: 2x2, activation: ELU
+- Convolution: 5x5, filter: 48, strides: 2x2, activation: ELU
+- Convolution: 3x3, filter: 64, strides: 1x1, activation: ELU
+- Convolution: 3x3, filter: 64, strides: 1x1, activation: ELU
 - Drop out (0.5)
 - Fully connected: neurons: 264, activation: ELU
 - Fully connected: neurons: 100, activation: ELU
@@ -89,21 +87,21 @@ The activation function for convolution and fully-connected layers is ELU (Expon
 
 
 
-####2. Attempts to reduce overfitting in the model
+2. Attempts to reduce overfitting in the model
 
 In order to reduce overfitting, the model contains dropout layers with keep probability of 0.5. Also, the model was trained and validated on different data sets, and the model stop training when the validation errors increases. The model was tested by running it through the simulator and ensuring that the vehicle stays on the track.
 
-####3. Model parameter tuning
+3. Model parameter tuning
 
 The model used an Adam optimizer, so the parameters are automatically updated.
 
-####4. Appropriate training data
+4. Appropriate training data
 
 Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, recovering from the left and right sides of the road.
 
-###Model Architecture and Training Strategy
+Model Architecture and Training Strategy
 
-####1. Solution Design Approach
+1. Solution Design Approach
 
 The overall strategy for deriving a model architecture was to design an end-to-end system from front-view images to predict steering angles. My first step was to use a convolution neural network model similar to the nvidia model. I thought this model might be appropriate because ...
 
@@ -111,7 +109,7 @@ In order to gauge how well the model was working, I split my image and steering 
 
 At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road. 
 
-####2. Final Model Architecture
+2. Final Model Architecture
 
 The final architecture of the model is denoted as follows: 
 
@@ -142,7 +140,7 @@ The final architecture of the model is denoted as follows:
 
 ---
 
-####3. Creation of the Training Set & Training Process
+3. Creation of the Training Set & Training Process
 
 To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
 
@@ -153,7 +151,7 @@ To capture good driving behavior, I first recorded two laps on track one using c
 |![alt text][center2] |
 
 
-In realty, three camera shots are taken for each time-stamp (one from center, one from left, and one from right):
+In , three camera shots are taken for each time-stamp (one from center, one from left, and one from right):
 
 | |   | 
 |:--------:|:------------:|
