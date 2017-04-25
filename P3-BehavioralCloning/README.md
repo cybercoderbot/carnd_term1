@@ -129,6 +129,7 @@ The final architecture of the model is denoted as follows:
 |dense_5 (Dense)                 |(None, 1)         |11      |dense_4          |
 
     
+|       | 
 |--------------------------------|
 |Total params: 721,251 |
 |Trainable params: 721,251 |
