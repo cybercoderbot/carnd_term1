@@ -34,7 +34,6 @@ My project includes the following files:
 * drive.py for driving the car in autonomous mode
 * model.h5 containing a trained convolution neural network 
 * video.mp4 for demonstrating the autonomous driving
-* README.md summarizing the results
 
 
 ---
@@ -129,7 +128,7 @@ The final architecture of the model is denoted as follows:
 |dense_4 (Dense)                 |(None, 10)        |510     |dense_3          |
 |dense_5 (Dense)                 |(None, 1)         |11      |dense_4          |
 
-|                                |     
+    
 |--------------------------------|
 |Total params: 721,251 |
 |Trainable params: 721,251 |
