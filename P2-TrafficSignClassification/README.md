@@ -20,6 +20,7 @@ The goals / steps of this project are the following:
 [img2]: ./results/train_samples_grayscale.png "Grayscaling"
 [img3]: ./results/label_hist.png "hist"
 
+[test]:./test_images/test.
 [test1]: ./test_images/children_crossing.jpg 
 [test2]:./test_images/no_vehicles.jpg 
 [test3]:./test_images/stop.jpg 
@@ -146,23 +147,7 @@ The model is very similar to LeNet. LeNet has successfully used for OCR problem 
 
 Here are 9 German traffic signs that I found on the web:
 
-
-
-
-<img src=./test_images/children_crossing.jpg height="150" width="150">
-
-<img src=./test_images/no_vehicles.jpg height="200" width="200">
-
-<img src=./test_images/stop.jpg height="200" width="200">
-
-<img src=./test_images/bumpy_road.jpg height="200" width="200">
-
-<img src=./test_images/speed_limit_60.jpg height="200" width="200">
-<img src=./test_images/yield.jpg height="200" width="200">
-<img src=./test_images/speed_limit_50.jpg height="200" width="200">
-<img src=./test_images/road_work.jpg height="200" width="200">
-<img src=./test_images/general_caution.jpg height="200" width="200">
-
+![alt text][test]
 
 After converting to grayscale and normalize pixel values, the output test images looks like:
 <img src=./results/test_grayscale1.png height="200" width="550" >
