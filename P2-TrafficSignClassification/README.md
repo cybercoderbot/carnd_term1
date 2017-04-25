@@ -73,7 +73,7 @@ To have a sense of how many classes and how the classes are distributed in the d
 
 **Design and Test a Model Architecture**
 
-####1. Image pre-processing (converting to grayscale and normalization).
+1. Image pre-processing (converting to grayscale and normalization).
 As the original images shows, raw data are cropped images of traffic signs, with a very low spatial resolution (32`x`32). The samples are in color space, and illumination condition is largely varied across classes. Some traffic signs has very well lighting condition while some are very poorly illuminated (code cell [7]). 
 
 ![alt text][img1]
@@ -84,13 +84,13 @@ To reduce sensitivity in color, each color image is converted into gray-scale. A
 
 
 
-**2. Training, validation and testing data. **
+2. Training, validation and testing data. 
 
 The training, validation and testing data are provided and stored in each pickled file. As mentioned above, training set has 34799 images, validation set has 
 4410 images and test set has 12630 images(code cell [1]).
 
 
-**3. Final model architecture.**
+3. Final model architecture.
 
 The model consists of 2 layers of convolution and 3 layers of feed-forward networks. Each layer of convolution is with 5`x`5 spatial filters, followed by a RELU activation and a Max pooling in 2`x`2 neighborhood. The filter depth in layer 1 and layer 2 are 6 and 12. Since traffic signs are of spatial size of 32`x`32, 5`x`5 convolution kernal is a good balance between extracting useful features without being too computational intensive. Most of traffic signs are in centered part of the images, so valid padding is used for convolutions. 
 
@@ -115,12 +115,12 @@ In the feed-forward network, the number of neurons decrease to approximately a h
 
 ---
 
-**4. Train the convolution network. **
+4. Train the convolution network. 
 
 For network training, a Adam optimizer is used for minimizing the training loss. The loss is computed as cross-entropy of softmax probabilities and traning labels. The Adam optimizer uses moving averages to update parameters, to prevent stuck in local optima. The algorithm uses an adaptive step size for learning, and thus converges to this step size without fine tuning. As a trade-off, the model requires more computation and memory parameters in each training step. The initial learning rate is 0.001. 
 
 
-**5. Mini-batch feeding and network convergence**
+5. Mini-batch feeding and network convergence
 An iterative approach is used to train the network for convergence. In each epoch, the whole data set is divided into mini-batches before feeding to the network. This makes training faster and scalable. The batch size is 128. A validation accuracy is monitored at each iteration. As output of code cell [10] shows, the validation accuracy is increasing from Epoch 1 to epoch 45. After epoch 45, the validation accuracy changes downward. That means 45 is a good epoch number to train the network sufficiently without overfitting.
  
 The model is very similar to LeNet. LeNet has successfully used for OCR problem for MNIST data. Since traffic sign data is also of very low resolution, a 2 layer convolution followed by a 3 layer feedforward network is chosen. The final model results were
