@@ -20,16 +20,7 @@ The goals / steps of this project are the following:
 [img2]: ./results/train_samples_grayscale.png "Grayscaling"
 [img3]: ./results/label_hist.png "hist"
 
-[test]:./test_images/test.
-[test1]: ./test_images/children_crossing.jpg 
-[test2]:./test_images/no_vehicles.jpg 
-[test3]:./test_images/stop.jpg 
-[test4]:./test_images/bumpy_road.jpg 
-[test5]:./test_images/speed_limit_60.jpg 
-[test6]:./test_images/yield.jpg 
-[test7]:./test_images/speed_limit_50.jpg 
-[test8]:./test_images/road_work.jpg 
-[test9]:./test_images/general_caution.jpg
+[test]:./test_images/test.png
 
 
 ---
