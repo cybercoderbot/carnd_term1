@@ -48,6 +48,7 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 1. Camera calibration and distortion-correction.
 To demonstrate this step, I will describe how I apply the distortion correction to one of the test images.  After obtaining `obj_points` and `img_points` from `find_corners()` function, `cv2.calibrateCamera` and `cv2.undistort` are used to compute undistorted images:
 
+
     ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(obj_points, img_points, img_size, None, None)
     undist = cv2.undistort(img, mtx, dist, None, mtx)
 
