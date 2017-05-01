@@ -48,8 +48,8 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 1. Camera calibration and distortion-correction.
 To demonstrate this step, I will describe how I apply the distortion correction to one of the test images.  After obtaining `obj_points` and `img_points` from `find_corners()` function, `cv2.calibrateCamera` and `cv2.undistort` are used to compute undistorted images:
 
-`ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(obj_points, img_points, img_size, None, None)
-    undist = cv2.undistort(img, mtx, dist, None, mtx)`
+    ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(obj_points, img_points, img_size, None, None)
+    undist = cv2.undistort(img, mtx, dist, None, mtx)
 
 
 To show how the undistorted image is different from the original image, I displayed original and undistorted checkerboard image side by side. As is demostrated, an unwarped checkerboard image removes camera distortion. The bottom image shows how real front-view camera images are restored. 
@@ -57,7 +57,7 @@ To show how the undistorted image is different from the original image, I displa
 
 2. Perspective transform.
 
-The code for my perspective transform includes a function called `warper()`, which appears in lines 1 through 8 in the file `example.py` (output_images/examples/example.py) (or, for example, in the 3rd code cell of the IPython notebook).  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+The code for my perspective transform includes a function called `perspective_warp()`. The `perspective_warp()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
 
 ```
 src = np.float32(
@@ -86,21 +86,18 @@ I verified that my perspective transform was working as expected by drawing the 
 
 
 3. Color transforms and Sobel filtering to create a thresholded binary image.  
-I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `another_file.py`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
+I used a combination of color and gradient thresholds to generate a binary image. 
 
 In real road images, lane lines are mostly yellow and white. So HLS color space is used for detecting specfic lane line colors. First, each warped bird-view lane line images are converted in HLS color space:
 
-` L = cv2.cvtColor(warped, cv2.COLOR_BGR2HLS)[:,:,1]`
-
-` S = cv2.cvtColor(warped, cv2.COLOR_BGR2HLS)[:,:,2]`
+    L = cv2.cvtColor(warped, cv2.COLOR_BGR2HLS)[:,:,1]
+    S = cv2.cvtColor(warped, cv2.COLOR_BGR2HLS)[:,:,2]
 
 Yellow color is reliably detected in the S (saturation) channel in HLS color space, we can get yellow lane lines by thresholding pixel values in S channel:
 
-`    s_thresh = (160, 250)`
-
-`    s_binary = np.zeros_like(S)`
-
-`    s_binary[(s_thresh[0] < S) & (S <= s_thresh[1])] = 1`
+    s_thresh = (160, 250)
+    s_binary = np.zeros_like(S)
+    s_binary[(s_thresh[0] < S) & (S <= s_thresh[1])] = 1
 
 White color is reliably detected in the L (lightness) channel in HLS color space, we can get white lane lines by thresholding pixel values in L channel:
 
@@ -178,8 +175,6 @@ After locating left and right lane lines correctly on the image, we can fill the
 ---
 
 **Pipeline (video)**
-
-1. Link to my final video output.
 
 Here's a [link to my video result](./project_video.mp4)
 
