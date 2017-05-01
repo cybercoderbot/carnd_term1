@@ -47,11 +47,10 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 
 1. Camera calibration and distortion-correction.
 To demonstrate this step, I will describe how I apply the distortion correction to one of the test images.  After obtaining `obj_points` and `img_points` from `find_corners()` function, `cv2.calibrateCamera` and `cv2.undistort` are used to compute undistorted images:
-
-
+```
     ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(obj_points, img_points, img_size, None, None)
     undist = cv2.undistort(img, mtx, dist, None, mtx)
-
+```
 
 To show how the undistorted image is different from the original image, I displayed original and undistorted checkerboard image side by side. As is demostrated, an unwarped checkerboard image removes camera distortion. The bottom image shows how real front-view camera images are restored. 
 ![alt text][undist]
