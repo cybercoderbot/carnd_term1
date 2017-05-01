@@ -1,6 +1,3 @@
-##Writeup 
-
----
 
 **Advanced Lane Finding Project**
 
@@ -34,9 +31,9 @@ The steps of this project are the following:
 [video1]: ./project_video.mp4 "Video"
 
 
-###Camera Calibration
+**Camera Calibration**
 
-####1. Compute the camera matrix and distortion coefficients.
+1. Compute the camera matrix and distortion coefficients.
 
 The code for this step is contained in the 2nd code cell of the IPython notebook located in "./adv_lane_detection.ipynb".  
 
@@ -46,9 +43,9 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 
 ![alt text][corner]
 
-###Pipeline (single images)
+**Pipeline (single images)**
 
-####1. Camera calibration and distortion-correction.
+1. Camera calibration and distortion-correction.
 To demonstrate this step, I will describe how I apply the distortion correction to one of the test images.  After obtaining `obj_points` and `img_points` from `find_corners()` function, `cv2.calibrateCamera` and `cv2.undistort` are used to compute undistorted images:
 
 `ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(obj_points, img_points, img_size, None, None)
@@ -58,7 +55,7 @@ To demonstrate this step, I will describe how I apply the distortion correction 
 To show how the undistorted image is different from the original image, I displayed original and undistorted checkerboard image side by side. As is demostrated, an unwarped checkerboard image removes camera distortion. The bottom image shows how real front-view camera images are restored. 
 ![alt text][undist]
 
-####2. Perspective transform.
+2. Perspective transform.
 
 The code for my perspective transform includes a function called `warper()`, which appears in lines 1 through 8 in the file `example.py` (output_images/examples/example.py) (or, for example, in the 3rd code cell of the IPython notebook).  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
 
@@ -87,7 +84,8 @@ This resulted in the following source and destination points:
 I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
 ![alt text][warped]
 
-####3. Color transforms and Sobel filtering to create a thresholded binary image.  
+
+3. Color transforms and Sobel filtering to create a thresholded binary image.  
 I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `another_file.py`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
 
 In real road images, lane lines are mostly yellow and white. So HLS color space is used for detecting specfic lane line colors. First, each warped bird-view lane line images are converted in HLS color space:
@@ -128,7 +126,7 @@ Following is result of images by thresholding outputs from sobel filters:
 
 
 
-####4. Identified lane-line pixels and fit their positions with a polynomial.
+4. Identified lane-line pixels and fit their positions with a polynomial.
 
 To detect lane lines in binary mask, a sliding window is applied. Then I loop over windows, finding the lane center within the margin. The result looks like:
 
@@ -147,7 +145,8 @@ Thus, both curved and straight lane lines are represented as follows:
 
 ![alt text][polyfit]
 
-####5. Calculate the radius of curvature of the lane and the position of the vehicle with respect to center.
+
+5. Calculate the radius of curvature of the lane and the position of the vehicle with respect to center.
 
 After getting `fit_cr_left` and `fit_cr_left` from the polynomial fitting, curvature of the lane lines can be computed as:
 
@@ -169,7 +168,8 @@ Offset of the vehicle to the center can be computed as:
     # Find the offset from the centre of the frame, and then multiply by scale
     offset = (w/2 - middle) * scale
 
-####6. Plot filled lane back down onto the road.
+
+6. Plot filled lane back down onto the road.
 
 After locating left and right lane lines correctly on the image, we can fill the lane lines using `cv2.fillPoly()` function and plot it back to the original image. Lane curvature and offset are also display on the image:
 
@@ -177,9 +177,9 @@ After locating left and right lane lines correctly on the image, we can fill the
 
 ---
 
-###Pipeline (video)
+**Pipeline (video)**
 
-####1. Link to my final video output.
+1. Link to my final video output.
 
 Here's a [link to my video result](./project_video.mp4)
 
@@ -191,9 +191,8 @@ Here's a [link to my video result](./project_video.mp4)
 
 ---
 
-###Discussion
+**Discussion**
 
-#### Problems faced in your implementation of this project.  
 
 The current model works good when the illumination is stable. Since we used color thresholding and manually chose the threshold value, the model may fail when the lighting condition changes. Also, if the road changes texture or has crack/ unexpected object, the detector might be fooled. More robust lane line detectors, like semantic segmentation, or curve detector that's independent of colors, might be helpful to incrase accuracy. Also, temporal information could also be consider to make the model more robust (locations of lane lines in the previous frame has large probability of being lane lines in the next frames). 
 
