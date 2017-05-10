@@ -127,7 +127,7 @@ Here's a [link to my video result](./project_result.mp4)
 
 In this project, a robust and efficient car detection model is used to detect cars in real images on the road. The cars can be detected at different locations, different scales, and different perspectives. The HOG features, color hist and hist bin is a good representation of color and shape. The SVC classifier proved efficient and performs well. However, it can be very challenging for the current model to detect cars in following circumstances: 
 
-1. When the lighting condition of the image changes. The underlying assumption of the models is that the frame images are properly illuminated. When the weather is gloomy or it's dark, the cars can be missed since cars are less obvious. A headlight/taillight detection component will be very helpful in those conditions.
+1. When the lighting condition of the image changes. The underlying assumption of the model is that the frame images are properly illuminated. When the weather is gloomy or it's dark, the cars can be missed since cars are less obvious. A headlight/taillight detection component will be very helpful in those conditions.
 
 2. When the cars are partially occluded. As the result shows, when the white car is partilly occluded, it will be missed in detection or be considered as a part of it's neighboring car. This can be solved if we used a tracking algorithm on top of the detection. When the cars appears in our field of view, it's identified and stored. When it's partially occuluded, it will be compared to the cars that's in the current database.
 
