@@ -1,102 +1,54 @@
 #**Finding Lane Lines on the Road** 
-[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
-<img src="laneLines_thirdPass.jpg" width="480" alt="Combined Image" />
+##Writeup - Yuheng Wang
 
-Overview
+
 ---
 
-When we drive, we use our eyes to decide where to go.  The lines on the road that show us where the lanes are act as our constant reference for where to steer the vehicle.  Naturally, one of the first things we would like to do in developing a self-driving car is to automatically detect lane lines using an algorithm.
+**Finding Lane Lines on the Road**
 
-In this project you will detect lane lines in images using Python and OpenCV.  OpenCV means "Open-Source Computer Vision", which is a package that has many useful tools for analyzing images.  
+The goals / steps of this project are the following:
 
-To complete the project, two files will be submitted: a file containing project code and a file containing a brief write up explaining your solution. We have included template files to be used both for the [code](https://github.com/udacity/CarND-LaneLines-P1/blob/master/P1.ipynb) and the [writeup](https://github.com/udacity/CarND-LaneLines-P1/blob/master/writeup_template.md).The code file is called P1.ipynb and the writeup template is writeup_template.md 
-
-To meet specifications in the project, take a look at the requirements in the [project rubric](https://review.udacity.com/#!/rubrics/322/view)
-
-
-Creating a Great Writeup
----
-For this project, a great writeup should provide a detailed response to the "Reflection" section of the [project rubric](https://review.udacity.com/#!/rubrics/322/view). There are three parts to the reflection:
-1. Describe the pipeline
-2. Identify any shortcomings
-3. Suggest possible improvements
-
-We encourage using images in your writeup to demonstrate how your pipeline works.  
-
-All that said, please be concise!  We're not looking for you to write a book here: just a brief description.
-
-You're not required to use markdown for your writeup.  If you use another method please just submit a pdf of your writeup. Here is a link to a [writeup template file](https://github.com/udacity/CarND-LaneLines-P1/blob/master/writeup_template.md). 
+* Make a pipeline that finds lane lines on the road
+* Reflect on my work in a written report
 
 
-The Project
+[//]: # (Image References)
+
+[image1]: ./test_result/solidWhiteRight_edges "Edges"
+
+
+[//]: # (Image References)
+
+[image2]: ./test_result/solidWhiteRight_line_edges "ColorLines"
+
+
 ---
 
-## If you have already installed the [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit/blob/master/README.md) you should be good to go!   If not, you can install the starter kit or follow the install instructions below to get started on this project. ##
+### Reflection
 
-**Step 1:** Getting setup with Python
+###1. My pipeline. 
 
-To do this project, you will need Python 3 along with the numpy, matplotlib, and OpenCV libraries, as well as Jupyter Notebook installed. 
+My pipeline is as follows:
 
-We recommend downloading and installing the Anaconda Python 3 distribution from Continuum Analytics because it comes prepackaged with many of the Python dependencies you will need for this and future projects, makes it easy to install OpenCV, and includes Jupyter Notebook.  Beyond that, it is one of the most common Python distributions used in data analytics and machine learning, so a great choice if you're getting started in the field.
+First, I converted the images to grayscale. To detect lane lines in the image, I conbined Hough Transform line detection with region of interest (ROI) selection. To do that, I first apply a 5 by 5 Gaussian filter to blur the image for edge detection, followed by canny edge detector with low threshold being 50 and high threshold being 160. This results in a black and white edge image of the road.
 
-Choose the appropriate Python 3 Anaconda install package for your operating system <A HREF="https://www.continuum.io/downloads" target="_blank">here</A>.   Download and install the package.
+![alt text][image1]
 
-If you already have Anaconda for Python 2 installed, you can create a separate environment for Python 3 and all the appropriate dependencies with the following command:
+To select only lane lines from the image, I apply a triangle shaped region of intest selector in the central bottom part of the image. Some of the lanes are with solid lines while some lanes are with dashed lines. To get a unified representation of lane lines, I used a line detector using hough transform. This detector will detect lines in the edge image and join broken lane line representation. In hough transform, I tune the parameters and I find that a threshold of 20, mininum line length of 150 and maximum line gap of 200, give me a good balance of join all line parts without picking up much noise.
 
-`>  conda create --name=yourNewEnvironment python=3 anaconda`
+Finally, I plot the line detection result on the original image. The result looks like:
+ 
+![alt text][image2]
 
-`>  source activate yourNewEnvironment`
 
-**Step 2:** Installing OpenCV
 
-Once you have Anaconda installed, first double check you are in your Python 3 environment:
+###2. Potential shortcomings and possible improvements
 
-`>python`    
-`Python 3.5.2 |Anaconda 4.1.1 (x86_64)| (default, Jul  2 2016, 17:52:12)`  
-`[GCC 4.2.1 Compatible Apple LLVM 4.2 (clang-425.0.28)] on darwin`  
-`Type "help", "copyright", "credits" or "license" for more information.`  
-`>>>`   
-(Ctrl-d to exit Python)
+In this model, I assume that Gaussian blurring followed by Canny edge detection will detect the edges effectively. When the road is shadowed by the tree trunks, it's prone to pick up the tree shadows (as in the challenge video). On the opposite, when the lanes are shadowed by the buildings or another car, it's hard to pick up the lane line correctly.
 
-run the following commands at the terminal prompt to get OpenCV:
+Another assumption in this model is that lane lines tend to appear in the bottom part of the road image. This holds true for most high way images, however, when driving on local, it's very risky to assum the location of the lanes, especially at intersections (when the lanes are curves instead of lines). A more robust lane detection model that makes no assumption of the locaton and shape of the lane lines would be essential for robustness in lane detection.
 
-`> pip install pillow`  
-`> conda install -c menpo opencv3=3.1.0`
+Thirdly, all parameters (Gaussian filter size, thresholds for Canny edge detection, thresholds and line gap length in Hough transform) are tuned by manual experiments. A generalized adaptive filtering and thresholding will be very helpful to make the model scale on a more variable dataset.
 
-then to test if OpenCV is installed correctly:
-
-`> python`  
-`>>> import cv2`  
-`>>>`  (i.e. did not get an ImportError)
-
-(Ctrl-d to exit Python)
-
-**Step 3:** Installing moviepy  
-
-We recommend the "moviepy" package for processing video in this project (though you're welcome to use other packages if you prefer).  
-
-To install moviepy run:
-
-`>pip install moviepy`  
-
-and check that the install worked:
-
-`>python`  
-`>>>import moviepy`  
-`>>>`  (i.e. did not get an ImportError)
-
-(Ctrl-d to exit Python)
-
-**Step 4:** Opening the code in a Jupyter Notebook
-
-You will complete this project in a Jupyter notebook.  If you are unfamiliar with Jupyter Notebooks, check out <A HREF="https://www.packtpub.com/books/content/basics-jupyter-notebook-and-python" target="_blank">Cyrille Rossant's Basics of Jupyter Notebook and Python</A> to get started.
-
-Jupyter is an ipython notebook where you can run blocks of code and see results interactively.  All the code for this project is contained in a Jupyter notebook. To start Jupyter in your browser, run the following command at the terminal prompt (be sure you're in your Python 3 environment!):
-
-`> jupyter notebook`
-
-A browser window will appear showing the contents of the current directory.  Click on the file called "P1.ipynb".  Another browser window will appear displaying the notebook.  Follow the instructions in the notebook to complete the project.  
-
-**Step 5:** Complete the project and submit both the Ipython notebook and the project writeup
 
