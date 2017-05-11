@@ -1,6 +1,6 @@
-#**Finding Lane Lines on the Road** 
+**Finding Lane Lines on the Road** 
 
-##Writeup - Yuheng Wang
+Writeup - Yuheng Wang
 
 
 ---
@@ -27,9 +27,7 @@ The goals / steps of this project are the following:
 
 ### Reflection
 
-###1. My pipeline. 
-
-My pipeline is as follows:
+1. My pipeline is as follows:
 
 First, I converted the images to grayscale. To detect lane lines in the image, I conbined Hough Transform line detection with region of interest (ROI) selection. To do that, I first apply a 5 by 5 Gaussian filter to blur the image for edge detection, followed by canny edge detector with low threshold being 50 and high threshold being 160. This results in a black and white edge image of the road.
 
@@ -43,7 +41,7 @@ Finally, I plot the line detection result on the original image. The result look
 
 
 
-###2. Potential shortcomings and possible improvements
+2. Potential shortcomings and possible improvements
 
 In this model, I assume that Gaussian blurring followed by Canny edge detection will detect the edges effectively. When the road is shadowed by the tree trunks, it's prone to pick up the tree shadows (as in the challenge video). On the opposite, when the lanes are shadowed by the buildings or another car, it's hard to pick up the lane line correctly.
 
