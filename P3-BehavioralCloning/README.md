@@ -32,8 +32,8 @@ My project includes the following files:
 
 * model.py containing the script to create and train the model
 * drive.py for driving the car in autonomous mode
-* model.h5 containing a trained convolution neural network 
-* video.mp4 for demonstrating the autonomous driving
+* model.h5 containing a trained convolution neural network (59.8MB, exceeds the github limit and thus unable to be included in this repository)
+* video.mp4 for demonstrating the autonomous driving (32.3MB, exceeds the github limit and thus unable to be included in this repository. Please go to YouTube Link for recent results)
 
 
 ---
