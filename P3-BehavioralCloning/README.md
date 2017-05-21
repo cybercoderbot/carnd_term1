@@ -42,7 +42,7 @@ My project includes the following files:
 |[![alt text][sim1]](https://youtu.be/nd9L8fGG2RI)|
 |[YouTube Demo](https://youtu.be/nd9L8fGG2RI)|
 
-The video size exceed maximum size of github (25MB). Pleae go to YouTube for the result.
+The video size exceed maximum size of github (25MB). Pleae go to YouTube for the updated result. The car drives successfully on the track 1 for two laps without leaving the track.
 
 ---
 2. Submission includes functional code
@@ -53,7 +53,7 @@ python drive.py model.h5
 
 3. Submission code is usable and readable
 
-The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
+The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works. The final 'model.h5' (59.6MB) exceeds the upper limit of github ans thus not included in this repository. 
 
 ---
 **Model Architecture and Training Strategy**
@@ -93,7 +93,7 @@ The model used an Adam optimizer, so the parameters are automatically updated.
 
 4. Appropriate training data
 
-Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, recovering from the left and right sides of the road.
+Training data was chosen to keep the vehicle driving on the road. To collect the data that are most representable of the correct steering, I drove the car on the track for multiple laps, and in each lap the car tries to stay in the center as much as possible. I used a combination of center lane driving, recovering from the left and right sides of the road. Also, since the car mainly drives couner-clockwise on the road, the images are flipped with corresponding steering angles negated to reduce this left-turn bias.
 
 **Model Architecture and Training Strategy**
 
