@@ -156,7 +156,7 @@ Offset of the vehicle to the center can be computed as:
     l_px = l_poly[0] * h ** 2 + l_poly[1] * h + l_poly[2]
     r_px = r_poly[0] * h ** 2 + r_poly[1] * h + r_poly[2]
     
-    # Find the number of pixels per real metre
+    # Find the number of pixels per real meter
     scale = lane_width / np.abs(l_px - r_px)
     
     # Find the midpoint
